@@ -1,0 +1,10 @@
+config BR2_PACKAGE_GCONF
+	bool "gconf"
+	select BR2_PACKAGE_DBUS_GLIB
+	select BR2_PACKAGE_LIBXML2
+	help
+	  The GConf package contains a configuration database system used by many GNOME
+	  applications.
+
+	  http://ftp.gnome.org/pub/gnome/sources/GConf/3.2
+
