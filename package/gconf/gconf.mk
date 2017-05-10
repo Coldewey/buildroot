@@ -16,7 +16,7 @@ GCONF_LICENSE = GPLv2
 GCONG_LICENSE_FILE = COPYING
 
 define GCONF_POST_INSTALL
-	$(INSTALL) -v -m755 -d $(TARGET_DIR)/etc/gconf/gconf.xml.system)
+	$(INSTALL) -v -m755 -d $(TARGET_DIR)/etc/gconf/gconf.xml.system
 endef
 
 GCONF_POST_INSTALL_TARGET_HOOKS += GCONF_POST_INSTALL
