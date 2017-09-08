@@ -49,7 +49,9 @@ check-DEVELOPERS:
 .runtime_test: &runtime_test
     # Keep build directories so the rootfs can be an artifact of the job. The
     # runner will clean up those files for us.
-    script: ./support/testing/run-tests -o test-output/ -d test-dl/ -k ${CI_BUILD_NAME}
+    # Multiply every emulator timeout by 10 to avoid sporadic failures in
+    # elastic runners.
+    script: ./support/testing/run-tests -o test-output/ -d test-dl/ -k --timeout-multiplier 10 ${CI_BUILD_NAME}
     artifacts:
         when: always
         expire_in: 2 weeks
@@ -66,7 +68,6 @@ arm_juno_defconfig: *defconfig
 armadeus_apf27_defconfig: *defconfig
 armadeus_apf28_defconfig: *defconfig
 armadeus_apf51_defconfig: *defconfig
-armadeus_apf9328_defconfig: *defconfig
 at91sam9260eknf_defconfig: *defconfig
 at91sam9g20dfc_defconfig: *defconfig
 at91sam9g45m10ek_defconfig: *defconfig
@@ -119,7 +120,9 @@ grinn_chiliboard_defconfig: *defconfig
 grinn_liteboard_defconfig: *defconfig
 imx23evk_defconfig: *defconfig
 imx6q-sabresd_defconfig: *defconfig
+imx6q-sabresd_qt5_defconfig: *defconfig
 imx6ulpico_defconfig: *defconfig
+imx7dpico_defconfig: *defconfig
 lego_ev3_defconfig: *defconfig
 linksprite_pcduino_defconfig: *defconfig
 minnowboard_max-graphical_defconfig: *defconfig
@@ -196,6 +199,7 @@ snps_arc700_axs101_defconfig: *defconfig
 snps_archs38_axs103_defconfig: *defconfig
 snps_archs38_haps_defconfig: *defconfig
 snps_archs38_vdk_defconfig: *defconfig
+socrates_cyclone5_defconfig: *defconfig
 stm32f429_disco_defconfig: *defconfig
 stm32f469_disco_defconfig: *defconfig
 telit_evk_pro3_defconfig: *defconfig
@@ -203,6 +207,7 @@ toradex_apalis_imx6_defconfig: *defconfig
 ts4800_defconfig: *defconfig
 ts4900_defconfig: *defconfig
 ts5x00_defconfig: *defconfig
+ts7680_defconfig: *defconfig
 wandboard_defconfig: *defconfig
 warp7_defconfig: *defconfig
 warpboard_defconfig: *defconfig
@@ -229,6 +234,17 @@ tests.fs.test_jffs2.TestJffs2: *runtime_test
 tests.fs.test_squashfs.TestSquashfs: *runtime_test
 tests.fs.test_ubi.TestUbi: *runtime_test
 tests.fs.test_yaffs2.TestYaffs2: *runtime_test
+tests.init.test_busybox.TestInitSystemBusyboxRo: *runtime_test
+tests.init.test_busybox.TestInitSystemBusyboxRoNet: *runtime_test
+tests.init.test_busybox.TestInitSystemBusyboxRw: *runtime_test
+tests.init.test_busybox.TestInitSystemBusyboxRwNet: *runtime_test
+tests.init.test_none.TestInitSystemNone: *runtime_test
+tests.init.test_systemd.TestInitSystemSystemdRoFull: *runtime_test
+tests.init.test_systemd.TestInitSystemSystemdRoIfupdown: *runtime_test
+tests.init.test_systemd.TestInitSystemSystemdRoNetworkd: *runtime_test
+tests.init.test_systemd.TestInitSystemSystemdRwFull: *runtime_test
+tests.init.test_systemd.TestInitSystemSystemdRwIfupdown: *runtime_test
+tests.init.test_systemd.TestInitSystemSystemdRwNetworkd: *runtime_test
 tests.package.test_dropbear.TestDropbear: *runtime_test
 tests.package.test_ipython.TestIPythonPy2: *runtime_test
 tests.package.test_ipython.TestIPythonPy3: *runtime_test
