@@ -1,0 +1,9 @@
+config BR2_PACKAGE_UNCLUTTER
+	bool "unclutter"
+    depends on BR2_PACKAGE_XLIB_LIBX11
+	help
+      Unclutter runs in the background of an X11 session and after a specified period of inactivity hides the cursor from display. 
+      When the cursor is moved its display is restored. 
+      Users may specify specific windows to be ignored by unclutter.
+
+	  https://sourceforge.net/projects/unclutter/
