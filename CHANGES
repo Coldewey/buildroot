@@ -1,3 +1,29 @@
+2017.08-rc1, To be released
+
+	Major revamp of the gettext handling, with user-visible
+	effect:
+
+	  - prior to this revamp, when BR2_ENABLE_LOCALE=y, each
+	    package could decide to enable or not NLS support. When
+	    BR2_ENABLE_LOCALE was disabled, NLS support was forced off
+	    by passing --disable-nls to packages.
+
+	  - after this revamp, a new BR2_SYSTEM_ENABLE_NLS option
+            controls whether NLS support should be enabled or not in
+            packages. This option defaults to disabled, which means
+            that now, NLS support is by default disabled in all
+            packages.
+
+	Therefore, if you need NLS support in packages, you must now
+	explicitly enable the BR2_SYSTEM_ENABLE_NLS option.
+
+	Infrastructure:
+
+	- The host directory no longer has a usr/ component. This
+	  makes it much more natural to use that directory as an
+	  externally used toolchain. For compatibility with existing
+	  scripts, a link usr -> . is still added.
+
 2017.05.2, Released July 27th, 2017
 
 	Important / security related fixes.
@@ -257,6 +283,81 @@
 	#9836: triggerhappy: systemd unit broken
 	#9846: musl libc not installed correctly in target folder
 	#9856: build libubox failed on ubuntu 17.04 64bit
+
+2017.02.5, Released July 27th, 2017
+
+	Important / security related fixes.
+
+	Webkitgtk bumped to the 2.16.x series, fixing a large number
+	of security issues.
+
+	host-aespipe compile fix for Debian/Gentoo/Ubuntu toolchains
+	which default to PIE mode.
+
+	Updated/fixed packages: aespipe, apache, bind, binutils,
+	busybox, ccache, collectd, efibootmgr, efivar, expat, ffmpeg,
+	gcc, heimdal, iproute2, irssi, libglib2, libmemcached,
+	libosip2, libtirpc, libxml-parser-perl, linux-fusion,
+	linux-zigbee, mpg123, nodejs, orc, pcre, php, pulseaudio,
+	python-setproctitle, qt5base, rpi-firmware, samba4, syslinux,
+	systemd, spice, tcpdump, tiff, webkitgtk, x265, xen,
+	xserver_xorg-server, xvisor
+
+	Issues resolved (http://bugs.buildroot.org):
+
+	#10061: gcc5.4 buildroot toolchain for powerpc libsanitizer...
+
+2017.02.4, Released July 4th, 2017
+
+	Important / security related fixes.
+
+	Update support/scripts/scancpan to use METACPAN v1 API as v0
+	has been shutdown.
+
+	Update support/scripts/mkusers to handle setups where
+	/etc/shadow is a symlink.
+
+	External toolchain: Don't create musl dynamic loader symlink
+	for static builds.
+
+	Setlocalversion: Correct detection of mercurial revisions for
+	non-tagged versions.
+
+	Updated/fixed packages: apache, automake, bind, botan, c-ares,
+	dhcp, expat, fcgiwrap, gcc, gdb, gesftpserver, glibc, gnutls,
+	gst1-plugins-bad, imagemagick, imx-uuc, intltool, iperf,
+	ipsec-tools, irssi, libgcrypt, libmad, libnl, mosquitto,
+	mpg123, ncurses, nodejs, ntp, openssh, openvpn, qt5base,
+	qt5multimedia, rtl8821au, socat, spice, systemd, tor, tslib,
+	vlc, x264, xserver_xorg-server
+
+	Issues resolved (http://bugs.buildroot.org):
+
+	#9976: License file for package 'rtl8821au' incorrect
+
+2017.02.3, Released June 2nd, 2017
+
+	Important / security related fixes.
+
+	Download: <pkg>-source-check fixed for packages from git.
+
+	External toolchain: musl dynamic linker symlink for mips-sf
+	corrected.
+
+	Updated/fixed packages: armadillo, audiofile, bash,
+	bluez_utils, cppcms, dbus, dhcp, dropbear, efibootmgr, efl,
+	elfutils, faketime, fbgrab, flashrom, ftop, gdb, git,
+	google-breakpad, gpsd, hans, kvm-unit-tests, kyua, libev,
+	libmicrohttpd, libminiupnpc, libtasn1, libubox, ltp-testsuite,
+	lua, madplay, mariadb, mono, mosquitto, mxml, ntp,
+	nvidia-driver, openblas, openvpn, oracle-mysql, picocom, popt,
+	postgresql, pulseview, qt5base, qwt, rabbitmq-c, redis,
+	rpcbind, rtmpdump, samba4, strongswan, sudo, vlc
+
+	Issues resolved (http://bugs.buildroot.org):
+
+	#9796: source-check broken for Git downloads
+	#9871: fbgrab 1.3 won't build with BR2_REPRODUCIBLE set
 
 2017.02.2, Released May 1st, 2017
 
