@@ -11,4 +11,16 @@ UNCLUTTER_SITE = https://downloads.sourceforge.net/project/unclutter/unclutter/s
 UNCLUTTER_DEPENDENCIES = xlib_libX11
 UNCLUTTER_LICENSE_FILES = README
 
+define UNCLUTTER_BUILD_CMDS
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D) all
+endef
+
+define UNCLUTTER_INSTALL_STAGING_CMDS
+	$(INSTALL) -D -m 0755 $(@D)/unclutter $(STAGING_DIR)/usr/bin/unclutter
+endef
+
+define UNCLUTTER_INSTALL_TARGET_CMDS
+        $(INSTALL) -D -m 0755 $(@D)/unclutter $(TARGET_DIR)/usr/bin/unclutter
+endef
+
 $(eval $(generic-package))
